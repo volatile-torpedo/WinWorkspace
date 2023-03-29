@@ -12,7 +12,8 @@ $Necessities = @(
   "Microsoft.VisualStudioCode", 
   "Microsoft.AzureCLI",
   "Microsoft.PerfView", 
-  "Microsoft.Sysinternals.TCPView"
+  "Microsoft.Sysinternals.TCPView",
+  "Microsoft.PowerShell"
 )
 
 # Check for updates
