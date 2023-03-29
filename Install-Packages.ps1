@@ -16,7 +16,7 @@ winget install -e --id Microsoft.NuGet
 # winget install microsoft.onedrive --accept-package-agreements --accepts-source-agreements
 # winget install -e --id wingetui
 
-if (not(Get-InstalledModule Az -ErrorAction SilentlyContinue)){
+if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)){
   Install-Modlule -Name Az -Scope AllUsers -Force -SkipPublisherCheck
 }
 
