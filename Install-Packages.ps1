@@ -1,4 +1,4 @@
-#Requires Administrator
+#Requires -RunAsAdministrator
 #Requires -Modules @{ ModuleName="Appx"; ModuleVersion="2.0.1.0" }
 
 param (
