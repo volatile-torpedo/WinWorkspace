@@ -14,6 +14,7 @@ $Necessities = @(
   "Microsoft.PerfView", 
   "Microsoft.Sysinternals.TCPView",
   "Microsoft.PowerShell"
+  "Git.Git"
 )
 
 # Check for updates
