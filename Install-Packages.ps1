@@ -7,9 +7,16 @@ param (
 [switch]$ToysOnly
 )
 
+$Necessities = @(
+  "Microsoft.WindowsTerminal", 
+  "Microsoft.VisualStudioCode", 
+  "Microsoft.AzureCLI",
+  "Microsoft.PerfView", 
+  "Microsoft.Sysinternals.TCPView"
+)
 
 # Check for updates
-winget upgrade
+winget upgrade --accept-source-agreements --accept-source-agreements
 winget install -e --id Microsoft.NuGet
 
 # Install bare necessities
