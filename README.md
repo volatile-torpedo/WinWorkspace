@@ -1,7 +1,3 @@
-##### Table of Contents  
-[Headers](#headers)  
-[Emphasis](#emphasis) 
-
 # Overview
 **Want to set up a Windows dev system on the quick?**
 This script will provide a framework/template for your preferred tools.
