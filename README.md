@@ -16,7 +16,7 @@ Modify it to fit your desired bill of materials.
 
 
 # TO DO
-- Add conditions to check for components instead of forcing unecessary installs
-- Add -ForceInstall switch to skip the component check
-- Make it work in PowerShell 7.x AND 5.x (Win 10)
-- Explore Scoop for per-user/non-administrative installations
+- [ ] Add conditions to check for components instead of forcing unecessary installs
+- [ ] Add -ForceInstall switch to skip the component check
+- [ ] Make it work in PowerShell 7.x AND 5.x (Win 10)
+- [ ] Explore Scoop for per-user/non-administrative installations
