@@ -34,4 +34,4 @@ Foreach ($package in $Necessities){
   winget install -e --id $package --accept-source-agreements --accept-source-agreements
 }
 
-Install-Module Az
+Install-Module Az -SkipPublisherCheck -Confirm:$false -Force
