@@ -19,4 +19,4 @@ Register-PackageSource -provider NuGet -name nugetRepository -location https://w
 # Enable WinGet installer and prerequisite - latest as of December 2021
 Add-AppxPackage $PSScriptRoot\bin\Microsoft.UI.Xaml.2.7.appx
 Add-AppxPackage $PSScriptRoot\bin\Microsoft.VCLibs.x64.14.00.Desktop.appx
-Add-AppxPackage $PSScriptRoot\bin\Microsoft.DesktopAppInstaller_8w3kyb3d8bbwe.msixbundle 
+Add-AppxPackage $PSScriptRoot\bin\Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle 
