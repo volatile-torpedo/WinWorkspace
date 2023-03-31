@@ -2,6 +2,13 @@
 **Want to set up a Windows dev system on the quick?**
 This script will provide a framework/template for your preferred tools.
 
+# How to download and install
+Aside from cloning this repo, you can also download and extract the zip file of a branch.
+```ps
+Invoke-WebRequest 'https://github.com/volatile-torpedo/image-hydrator/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\image-hydrator-main .\image-hydrator; Remove-Item .\main.zip
+```
+
+# Scripts
 ## Setup-Baseline Script
 Ensure requirements are met to support
 - [x] WinGet
