@@ -32,3 +32,6 @@ Foreach ($package in $Necessities){
 }
 
 # Install SysInternals Suite
+Invoke-WebRequest 'https://download.sysinternals.com/files/SysinternalsSuite.zip' -OutFile .\SysInternalsSuite.zip
+Expand-Archive .\SysInternalsSuite.zip .\SysInternals
+Remove-Item .\SysInternalsSuite.zip
