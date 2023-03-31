@@ -23,7 +23,7 @@ winget install -e --id Microsoft.NuGet
 
 # Install Az PowerShell modules
 if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)){
-  Install-Modlule -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
+  Install-Module -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
 }
 
 # Install Necessities
