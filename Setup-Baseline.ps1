@@ -13,7 +13,7 @@ if (-not(Get-PackageProvider | Where-Object {$_.Name -eq "NuGet" -and $_.Version
 }
 
 #Install Package Provider Source. For future use
-if (-not(Get-PackageSource -Name nugetRepository).IsRegistered){
+if (-not(Get-PackageSource | Where-Object {$_.Location -eq "https://www.nuget.org/api/v2"})){
     Register-PackageSource -provider NuGet -name nugetRepository -location https://www.nuget.org/api/v2 -Trusted
 }
 
