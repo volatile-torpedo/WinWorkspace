@@ -21,12 +21,9 @@ $Necessities = @(
 winget upgrade --accept-source-agreements --accept-source-agreements
 winget install -e --id Microsoft.NuGet
 
-# Install bare necessities
-# winget install microsoft.onedrive --accept-package-agreements --accepts-source-agreements
-# winget install -e --id wingetui
-
+# Install Az PowerShell modules
 if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)){
-  Install-Modlule -Name Az -Scope AllUsers -Force -SkipPublisherCheck
+  Install-Module -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
 }
 
 # Install Necessities
@@ -34,4 +31,7 @@ Foreach ($package in $Necessities){
   winget install -e --id $package --accept-source-agreements --accept-source-agreements
 }
 
-Install-Module Az -SkipPublisherCheck -Confirm:$false -Force
+# Install SysInternals Suite
+Invoke-WebRequest 'https://download.sysinternals.com/files/SysinternalsSuite.zip' -OutFile .\SysInternalsSuite.zip
+Expand-Archive .\SysInternalsSuite.zip .\SysInternals
+Remove-Item .\SysInternalsSuite.zip
