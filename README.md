@@ -3,7 +3,14 @@
 This script will provide a framework/template for your preferred tools.
 
 # How to download and install
-Aside from cloning this repo, you can also download and extract the zip file of a branch.
+Option 1: CLone the repo
+
+Option 2: Download and extract the files from the repo (in case you don't have git locally installed)
+```ps
+Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip
+```
+
+Option 3: Download and install the files directly from the repo
 ```ps
 Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip
 ```
