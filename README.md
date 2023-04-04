@@ -12,7 +12,7 @@ Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/he
 
 Option 3: Download and install the files directly from the repo
 ```ps
-Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & SprintBox\Setup-Baseline.ps1; & SprinBox\Hydrate.ps1
+Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Setup-Baseline.ps1; & .\SpringBox\Hydrate.ps1
 ```
 
 # Scripts
