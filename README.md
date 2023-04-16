@@ -2,6 +2,8 @@
 **Want to set up a Windows dev system on the quick?**
 This script will provide a framework/template for your preferred tools.
 
+![SpringBox](.images/SpringBox-cover.png "SpringBox")
+
 # How to download and install
 Option 1: CLone the repo
 
