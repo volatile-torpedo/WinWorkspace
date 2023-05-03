@@ -7,22 +7,22 @@ This script will provide a framework/template for your preferred tools.
 # How to download and install
 Option 1: CLone the repo
 
-Option 2: Open a Powershell console and run the command below to download and extract the files from the repo (in case you don't have git locally installed)
-```ps
-Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip
-```
-
-Option 3: Open an **administrative** PowerShell window and run the command below to download and install the files directly from the repo:
+Option 2: Need to get up and running quickly? But your target system doesn't even have WinGet installed or the client has set up a policy to disable the use of the Microsoft Store to download it. But wait, you have admin privileges, so... open a Powershell console and run the command below to download and extract the files from the repo (in case you don't have git locally installed)
 ```ps
 Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Setup-Baseline.ps1; & .\SpringBox\Hydrate.ps1; Remove-Item .\SpringBox -Force -Recurse
+```
+
+Option 3: Ahh. The client already set up a system for you and it already has winget and you have admin privileges. Open an **administrative** shell window and run the command below to directly install the Hydrate script:
+```ps
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))"
 ```
 
 # Scripts
 ## Setup-Baseline Script
 Ensure requirements are met to support
-- [x] WinGet
-- [ ] Chocolatey
-- [ ] Scoop
+- [x] WinGet: Populaarity gaining
+- [ ] Chocolatey Popularity waning; better catalog, but widespread enterprise use requires planning.
+- [ ] Scoop: Grassroots growth in the Windows arena, but gaining popularity in mixed OS environments.
 
 ## Hydrate.ps1
 Modify it to fit your desired bill of materials.
@@ -37,7 +37,6 @@ Modify it to fit your desired bill of materials.
 
 [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
 > The Azure command-line interface (Azure CLI) is a set of commands used to create and manage Azure resources.
-
 
 
 # TO DO
