@@ -13,8 +13,17 @@ $Necessities = @(
   "Microsoft.AzureCLI",
   "Microsoft.PerfView", 
   "Microsoft.Sysinternals.TCPView",
-  "Microsoft.PowerShell"
-#   "Git.Git"
+  "Microsoft.PowerShell",
+  "Git.Git",
+  "GitHub.GitHubDesktop",
+  "TobySuggate.GitFiend",
+  "OpenJS.NodeJS",
+#   "OBSProject.OBSStudio",
+#   "Obsidian.Obsidian",
+#   "Notion.Notion",
+#   "NotionRepackaged.NotionEnhanced"
+  "Python.Python.3.11",
+  "Microsoft.PowerToys"
 )
 
 # Check for updates
