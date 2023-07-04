@@ -1,34 +1,33 @@
 # SpringBox
-**Want to set up a Windows dev system on the quick?**
-This script will provide a framework/template for your preferred tools.
+**Want to set up a Windows Dev system quickly?**
+Ideally, development or test systems should be built from a known baseline. This script will help you set up your "disposable" Windows system with the tools you need to get started quickly.
 
-![SpringBox](.images/SpringBox-cover.png "SpringBox")
+There's a good chance that this script won't meet your list of preferred tools. You are free to modify it with the list of applications and utilities.
 
+![SpringBox](.images/SpringBox-cover.png "SpringBox" x=300)
 # How to download and install
-Option 1: CLone the repo
+## Option 1: Clone the repository
+1. Clone this repository to your local system.
+2. If you're stuck with an out-of-the-box Windows 10 system, run the Setup-Baseline.ps1 script to install the necessary components.
+3. Then run the Hydrate.ps1 script to install the applications and utilities you need.
 
-Option 2: Need to get up and running quickly? But your target system doesn't even have WinGet installed or the client has set up a policy to disable the use of the Microsoft Store to download it. But wait, you have admin privileges, so... open a Powershell console and run the command below to download and extract the files from the repo (in case you don't have git locally installed)
+## Option 2: You're on a restricted Windows 10 system without WinGet
+Need to get up and running quickly? But your target system doesn't even have WinGet installed or the client has set up a policy to disable the use of the Microsoft Store to download it. But wait, you have admin privileges, so... open a Powershell 5 console and run the command below to download and extract the files from the repo (in case you don't have git locally installed)
 ```ps
 Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Setup-Baseline.ps1; & .\SpringBox\Hydrate.ps1; Remove-Item .\SpringBox -Force -Recurse
 ```
 
-Option 3: Ahh. The client already set up a system for you and it already has winget and you have admin privileges. Open an **administrative** shell window and run the command below to directly install the Hydrate script:
+## Option 3: Directly download and run the Hydrate script
+Ahh. Windows 11... the client already provisioned a system for you. It also winget and you have admin privileges already! Open an **administrative** shell window and run the command below to directly install the Hydrate script:
 ```ps
 PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))"
 ```
 
-# Scripts
-## Setup-Baseline Script
-Ensure requirements are met to support
-- [x] WinGet: Populaarity gaining
-- [ ] Chocolatey Popularity waning; better catalog, but widespread enterprise use requires planning.
-- [ ] Scoop: Grassroots growth in the Windows arena, but gaining popularity in mixed OS environments.
-
-## Hydrate.ps1
+# Hydrate.ps1
 Modify it to fit your desired bill of materials.
 
 # Default Bill of Materials
-## Necessities
+## Mandatory
 [Windows Terminal](https://github.com/microsoft/terminal)
 > Windows Terminal is a new, modern, feature-rich, productive terminal application for command-line users. It includes many of the features most frequently requested by the Windows command-line community including support for tabs, rich text, globalization, configurability, theming & styling, and more.
 
@@ -41,7 +40,8 @@ Modify it to fit your desired bill of materials.
 
 # TO DO
 - [x] Add conditions to check for components instead of forcing unecessary installs
-- [ ] Add -ForceInstall switch to skip the component check
-- [ ] Make it work in PowerShell 7.x AND 5.x (Win 10)
-- [ ] Explore Scoop for per-user/non-administrative installations
-- [ ] Add option to install Chocolatey
+- [ ] Add a screen shot tool (Greenshot)
+- [ ] Add a screen recording tool that will export to GIF (ScreenToGif)
+- [ ] Add a tool to create animated GIFs from video files (Gifski)
+- [ ] Add a tool to convert JPG to PNG with transparency (ImageMagick)
+
