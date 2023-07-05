@@ -47,6 +47,8 @@ function Get-YesNo {
 $Mandatory = @(
   "Microsoft.WindowsTerminal", 
   "JanDeDobbeleer.OhMyPosh",
+  "Graph X-Ray",                        # MS Store ID: 9N03GNKDJTT6
+  "Greenshot.Greenshot",                
   "Microsoft.PerfView", 
   "Microsoft.PowerShell",
   # "Microsoft.AzureCLI",
@@ -131,7 +133,7 @@ if (-not $SkipMandatory) {
   Expand-Archive .\SysInternalsSuite.zip .\SysInternals
   Remove-Item .\SysInternalsSuite.zip
 
-  # TODO: Test this ... Install Nerd Fonts
+  # Test this ... Install Nerd Fonts
   & $PsScriptRoot/nerdfonts/install.ps1
 
 }

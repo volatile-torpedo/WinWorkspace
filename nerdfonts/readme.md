@@ -1,8 +1,8 @@
 <h1 align="center">
-  <img src="images/nerd-fonts-logo.svg" alt="Nerd Fonts Logo" />
+Nerd Fonts
 </h1>
 <h2 align="center">
-  <img alt="Iconic font aggregator, collection, and patcher" src="images/project-subtitle-phrase.svg">
+  Iconic font aggregator, collection, and patcher
 </h2>
 
 <div align="center">
@@ -17,14 +17,6 @@
 
 
 **Nerd Fonts** is a project that patches developer targeted fonts with a high number of glyphs (icons). Specifically to add a high number of extra glyphs from popular 'iconic fonts' such as [Font Awesome][font-awesome], [Devicons][vorillaz-devicons], [Octicons][octicons], and [others](#glyph-sets).
-
-The following Sankey flow diagram shows the current glyph sets included:
-
-<p align="center">
-  <img src="images/sankey-glyphs-combined-diagram.svg" alt="@SankeyMATIC Diagram" />
-</p>
-<sub><i>Diagram created using <a href="http://sankeymatic.com/" title="SankeyMATIC (BETA): A Sankey diagram builder for everyone">@SankeyMATIC</a></i></sub>
-
 
 ## Important Notices
 * `master` branch file paths are **not** considered stable. [Verify your repository URI references](#unstable-file-paths)

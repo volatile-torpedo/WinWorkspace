@@ -40,8 +40,9 @@ Modify it to fit your desired bill of materials.
 
 # TO DO
 - [x] Add conditions to check for components instead of forcing unecessary installs
-- [ ] Add a screen shot tool (Greenshot)
-- [ ] Add a screen recording tool that will export to GIF (ScreenToGif)
+- [x] Add a screen shot tool (Greenshot)
+- [x] Add Graph X-Ray (Beta) to pull Microsoft Graph PowerShell from Portal Actions
+- [x] Add a screen recording tool that will export to GIF (ScreenToGif)
 - [ ] Add a tool to create animated GIFs from video files (Gifski)
 - [ ] Add a tool to convert JPG to PNG with transparency (ImageMagick)
 
