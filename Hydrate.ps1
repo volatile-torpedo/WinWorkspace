@@ -19,9 +19,10 @@
 param (
   [switch]$InstallAll,
   [switch]$SkipMandatory,
-  [switch]$InstallAzStack,
+  [switch]$InstallAzTools,
   [switch]$InstallGitTools,
-  [switch]$InstallDevStack
+  [switch]$InstallDevTools,
+  [switch]$Fonts
 )
 
 # Functions
@@ -45,6 +46,7 @@ function Get-YesNo {
 # Variables
 $Mandatory = @(
   "Microsoft.WindowsTerminal", 
+  "JanDeDobbeleer.OhMyPosh",
   "Microsoft.PerfView", 
   "Microsoft.PowerShell",
   # "Microsoft.AzureCLI",
@@ -90,8 +92,8 @@ $DevStack = @(
   "DevToys",
   "Docker.DockerDesktop",
   "easyWSL"
-  "OpenJS.NodeJS.LTS",
-  #  "Python.Python.3.11",
+  "OpenJS.NodeJS.LTS"
+  #  "Python.Python.3.11"   # Already installed with OpenJS.NodeJS.LTS
 )
 
 # Prompt for Options
@@ -112,9 +114,9 @@ if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
 # TODO: Skip all prompts if $InstallAll is set
 if ($InstallAll) {
   $SkipMandatory = $false
-  $InstallAzStack = $true
+  $InstallAzTools = $true
   $InstallGitTools = $true
-  $InstallDevStack = $true  
+  $InstallDevTools = $true  
 }
 
 # Install Mandatory packages
@@ -128,6 +130,10 @@ if (-not $SkipMandatory) {
   Invoke-WebRequest 'https://download.sysinternals.com/files/SysinternalsSuite.zip' -OutFile .\SysInternalsSuite.zip
   Expand-Archive .\SysInternalsSuite.zip .\SysInternals
   Remove-Item .\SysInternalsSuite.zip
+
+  # TODO: Test this ... Install Nerd Fonts
+  & $PsScriptRoot/nerdfonts/install.ps1
+
 }
 else {
   Write-Host "SkipMandatory is set. Ignoring Mandatory packages..." -ForegroundColor DarkYellow
@@ -166,11 +172,3 @@ else {
   Write-Host "DevStack is not set. Ignoring Dev Stack packages..." -ForegroundColor DarkYellow
 }
 
-# Install Toys
-if ($ToysOnly) {
-  Write-Host "🚧 ToysOnly is set. Installing Toys packages..." -ForegroundColor Green 
-  winget install -e --id Microsoft.PowerToys --accept-source-agreements --accept-package-agreements
-}
-else {
-  Write-Host "ToysOnly is not set. Ignoring Toys packages..." -ForegroundColor DarkYellow
-}

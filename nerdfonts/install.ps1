@@ -29,7 +29,7 @@ dynamicparam {
     [string[]]$FontNames = Join-Path $PSScriptRoot patched-fonts | Get-ChildItem -Directory -Name
     $Attributes.Add([ValidateSet]::new(($FontNames)))
 
-    $Parameter = [Management.Automation.RuntimeDefinedParameter]::new('FontName',  [string[]], $Attributes)
+    $Parameter = [Management.Automation.RuntimeDefinedParameter]::new('FontName', [string[]], $Attributes)
     $RuntimeParams = [Management.Automation.RuntimeDefinedParameterDictionary]::new()
     $RuntimeParams.Add('FontName', $Parameter)
 
@@ -38,25 +38,34 @@ dynamicparam {
 
 end {
     $FontName = $PSBoundParameters.FontName
-    if (-not $FontName) {$FontName = '*'}
+    if (-not $FontName) { $FontName = '*' }
 
     $fontFiles = [Collections.Generic.List[System.IO.FileInfo]]::new()
 
     Join-Path $PSScriptRoot patched-fonts | Push-Location
     foreach ($aFontName in $FontName) {
-        Get-ChildItem $aFontName -Filter "*.ttf" -Recurse | Foreach-Object {$fontFiles.Add($_)}
-        Get-ChildItem $aFontName -Filter "*.otf" -Recurse | Foreach-Object {$fontFiles.Add($_)}
+        Get-ChildItem $aFontName -Filter "*.ttf" -Recurse | Foreach-Object { $fontFiles.Add($_) }
+        Get-ChildItem $aFontName -Filter "*.otf" -Recurse | Foreach-Object { $fontFiles.Add($_) }
     }
     Pop-Location
 
     $fonts = $null
+    $LocalFontsFolder = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Microsoft/Windows/Fonts"
     foreach ($fontFile in $fontFiles) {
-        if ($PSCmdlet.ShouldProcess($fontFile.Name, "Install Font")) {
+        if ($PSCmdlet.ShouldProcess($fontFile.Name, "Inspecting Font")) {
             if (!$fonts) {
                 $shellApp = New-Object -ComObject shell.application
                 $fonts = $shellApp.NameSpace(0x14)
             }
-            $fonts.CopyHere($fontFile.FullName)
+            if (Test-Path -Path (Join-Path -Path $LocalFontsFolder -ChildPath $fontFile.Name)) {
+                    Write-Host "Skipping $($fontFile.Name) because it is already installed"
+                    # Write-Host "Overwriting $($fontFile.Name) because it is already installed"
+                    # Write-Debug "$($fontFile.FullName) --> $($LocalFontsFolder)"
+                    # Copy-Item -Path $fontFile.FullName -Destination $LocalFontsFolder -Force
+                } else {
+                    Write-Host "Installing $($fontFile.Name)"
+                    $fonts.CopyHere($fontFile.FullName)
+                }
+            }
         }
     }
-}
