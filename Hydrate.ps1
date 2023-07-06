@@ -47,7 +47,7 @@ function Get-YesNo {
 $Mandatory = @(
   "Microsoft.WindowsTerminal", 
   "JanDeDobbeleer.OhMyPosh",
-  "Graph X-Ray",                        # MS Store ID: 9N03GNKDJTT6
+  "Graph X-Ray", # MS Store ID: 9N03GNKDJTT6
   "Greenshot.Greenshot",                
   "Microsoft.PerfView", 
   "Microsoft.PowerShell",
@@ -67,7 +67,7 @@ $Mandatory = @(
   "Microsoft.PowerToys"
 )
   
-$AzureStack = @(
+$AzureTools = @(
   "Microsoft.AzureCLI",
   "Microsoft.AzureStorageExplorer",
   "Microsoft.AzureDataStudio",
@@ -95,14 +95,22 @@ $DevStack = @(
   "Docker.DockerDesktop",
   "easyWSL"
   "OpenJS.NodeJS.LTS"
-  #  "Python.Python.3.11"   # Already installed with OpenJS.NodeJS.LTS
+  #  "Python.Python.3.11"   # Already installed along with Chocolatey with OpenJS.NodeJS.LTS
 )
 
-# Prompt for Options
-$SkipMandatory = Get-YesNo -Message "Do you want to skip the Mandatory packages?"
-$AzureStack = Get-YesNo -Message "Do you want to install the Azure Stack?"
-$GitTools = Get-YesNo -Message "Do you want to install the Git Tools?"
-$DevStack = Get-YesNo -Message "Do you want to install the Dev Stack?"
+# Prompt for Options, but Skip all prompts if $InstallAll is set
+if ($InstallAll.IsPresent) {
+  $SkipMandatory = $false
+  $InstallAzTools = $true
+  $InstallGitTools = $true
+  $InstallDevTools = $true  
+}
+else {
+  $SkipMandatory = Get-YesNo -Message "Do you want to skip the Mandatory packages?"
+  $InstallAzTools = Get-YesNo -Message "Do you want to install the Azure Tools?"
+  $InstallGitTools = Get-YesNo -Message "Do you want to install the Git Tools?"
+  $InstallDevTools = Get-YesNo -Message "Do you want to install the Dev Tools?"
+}
 
 # Check for updates
 winget upgrade --accept-source-agreements --accept-source-agreements
@@ -112,13 +120,6 @@ Install-PackageProvider -Name NuGet -Force
 # Install Az PowerShell modules
 if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
   Install-Module -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
-}
-# TODO: Skip all prompts if $InstallAll is set
-if ($InstallAll) {
-  $SkipMandatory = $false
-  $InstallAzTools = $true
-  $InstallGitTools = $true
-  $InstallDevTools = $true  
 }
 
 # Install Mandatory packages
@@ -142,9 +143,9 @@ else {
 }
 
 # Install Azure Stack
-if ($AzureStack) {
+if ($InstallAzTools) {
   Write-Host "🚧 AzureStack is set. Installing Azure Stack packages..." -ForegroundColor Green 
-  Foreach ($package in $AzureStack) {
+  Foreach ($package in $AzureTools) {
     winget install -e --id $package --accept-source-agreements --accept-package-agreements
   }
 }
@@ -153,7 +154,7 @@ else {
 }
 
 # Install Git Tools
-if ($GitTools) {
+if ($InstallGitTools) {
   Write-Host "🚧 GitTools is set. Installing Git Tools packages..." -ForegroundColor Green 
   Foreach ($package in $GitTools) {
     winget install -e --id $package --accept-source-agreements --accept-package-agreements
@@ -164,7 +165,7 @@ else {
 }
 
 # Install Dev Stack
-if ($DevStack) {
+if ($InstallDevTools) {
   Write-Host "🚧 DevStack is set. Installing Dev Stack packages..." -ForegroundColor Green 
   Foreach ($package in $DevStack) {
     winget install -e --id $package --accept-source-agreements --accept-package-agreements
