@@ -45,26 +45,13 @@ function Get-YesNo {
 
 # Variables
 $Mandatory = @(
-  "Microsoft.WindowsTerminal", 
   "JanDeDobbeleer.OhMyPosh",
   "Graph X-Ray", # MS Store ID: 9N03GNKDJTT6
   "Greenshot.Greenshot",                
-  "Microsoft.PerfView", 
+  # "Microsoft.PerfView", 
   "Microsoft.PowerShell",
-  # "Microsoft.AzureCLI",
-  # "Git.Git",
-  # "GitHub.GitHubDesktop",
-  # "GitHub.cli",
-  # "TobySuggate.GitFiend",
-  # "OpenJS.NodeJS",
-  # "Microsoft.VisualStudioCode", 
-  # "Microsoft.Sysinternals.TCPView",
-  # "OBSProject.OBSStudio",
-  # "Obsidian.Obsidian",
-  # "Notion.Notion",
-  # "NotionRepackaged.NotionEnhanced"
-  # "StephanDilly.gitui",
-  "Microsoft.PowerToys"
+  "Microsoft.PowerToys",
+  "Microsoft.WindowsTerminal"
 )
   
 $AzureTools = @(
@@ -85,12 +72,10 @@ $GitTools = @(
   "GitHub.GitHubDesktop",
   "GitHub.cli",
   "TobySuggate.GitFiend",
-  "Microsoft.PowerToys",
   "StephanDilly.gitui"
 )
       
 $DevStack = @(
-  "Microsoft.VisualStudioCode",
   "DevToys",
   "Docker.DockerDesktop",
   "easyWSL"
