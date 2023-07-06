@@ -21,7 +21,7 @@ Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/he
 ## Option 3: Directly download and run the Hydrate script
 Ahh. Windows 11... the client already provisioned a system for you. It also winget and you have admin privileges already! Open an **administrative** shell window and run the command below to directly install the Hydrate script:
 ```ps
-PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))"
+PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1 -InstallAll'))"
 ```
 
 # Hydrate.ps1
