@@ -4,7 +4,8 @@ Ideally, development or test systems should be built from a known baseline. This
 
 There's a good chance that this script won't meet your list of preferred tools. You are free to modify it with the list of applications and utilities.
 
-![SpringBox](.images/SpringBox-cover.png "SpringBox" x=300)
+![SpringBox](.images/SpringBox-cover.png "SpringBox")
+
 # How to download and install
 ## Option 1: Clone the repository
 1. Clone this repository to your local system.
