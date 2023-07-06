@@ -13,9 +13,8 @@ App Hydrator - install your apps and tools on your disposable Windows systems ea
 Why do you want this? Read the [Use Cases](#use-cases) section for more.
 
 <!-- ![SpringBox](.images/SpringBox-cover.png "SpringBox") -->
-<div align="center">
 ![Alt text](.images/hydrator_small.jpeg)
-</div>
+
 
 # Use Cases
 
