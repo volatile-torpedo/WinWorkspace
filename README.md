@@ -1,16 +1,22 @@
 <h1 align="center">
-Hydrator
+setu.p.reset
 </h1>
 
 <h2 align="center">
-  Install tools into a Windows Dev/Jump box quickly and consistently
+  Install tools into a Windows Dev/Jump box quickly and consistently!
 </h2>
 
 ### 
 
-App Hydrator - install your apps and tools on your disposable Windows systems easily.
+setu.p.reset - install your apps and tools on your disposable Windows systems easily.
 
-Why do you want this? Read the [Use Cases](#use-cases) section for more.
+### Why do you want this? 
+Read the [Use Cases](#use-cases) section for more.
+
+### Why is this project so horribly named?!?
+This is actually the third iteration of the name, and it gets worse each time it's updated. This project was once called **SpringBox**, then **Utility-Hydrator**, then **Go-Flood-Yourself**, and now sticking with **setu.p.reset** only because it uses the period characters. 
+
+Who knows? Maybe the next set of project names would be made up emojis and unprintable characters.
 
 <!-- ![SpringBox](.images/SpringBox-cover.png "SpringBox") -->
 ![Alt text](.images/hydrator_small.jpeg)
@@ -82,7 +88,7 @@ Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/he
 2. If you're stuck with an out-of-the-box Windows 10 system, run the Setup-Baseline.ps1 script to install the necessary components.
 3. Customize and run the Hydrate.ps1 script to install the applications and utilities you need.
 
-# Default Bill of Materials
+# What's Included out of the Box?
 
 The following lists outline the tools and utilities installed by the Hydrator.
 
