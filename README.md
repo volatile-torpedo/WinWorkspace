@@ -142,7 +142,7 @@ The following lists outline the tools and utilities installed by the Hydrator.
 - NodeJS LTS -->
 
 # TO DO
-
+- [ ] **MUST DO: Convert to Winget Configuration YAML and PowerShell DSC!!**
 - [x] Add conditions to check for components instead of forcing unecessary installs
 - [x] Add a screen shot tool (Greenshot)
 - [x] Add Graph X-Ray (Beta) to pull Microsoft Graph PowerShell from Portal Actions
