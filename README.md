@@ -1,5 +1,5 @@
 <h1 align="center">
-setu.p.reset
+SpringBox
 </h1>
 
 <h2 align="center">
@@ -8,27 +8,22 @@ setu.p.reset
 
 ### 
 
-setu.p.reset - install your apps and tools on your disposable Windows systems easily.
+SpringBox - install your apps and tools on your disposable Windows systems easily.
 
 ### Why do you want this? 
 Read the [Use Cases](#use-cases) section for more.
 
-### Why is this project so horribly named?!?
-This is actually the third iteration of the name, and it gets worse each time it's updated. This project was once called **SpringBox**, then **Utility-Hydrator**, then **Go-Flood-Yourself**, and now sticking with **setu.p.reset** only because it uses the period characters. 
-
-Who knows? Maybe the next set of project names would be made up emojis and unprintable characters.
-
-<!-- ![SpringBox](.images/SpringBox-cover.png "SpringBox") -->
-![Alt text](.images/hydrator_small.jpeg)
+![SpringBox](.images/hydrator_small.jpeg) 
+<!-- ![Alt text](.images/hydrator_small.jpeg) -->
 
 
-# Use Cases
+## Use Cases
 
 Let's start with a situation - you're technical consultant set on assessing a problem, performing an audit, or integrating a solution. It's either for your client or your company's client. You decided that before you could start typing away at your keyboard, you need a "clean" environment. "Clean", in this case, is just a compute environment that has all the tools you need to get the job done.
 
 The client decides you give you a new laptop to do all that. You have the privileges to install your tools. If this happens, stop reading here and get to work!
 
-## Use Case 1: The Locked-Down Virtual Desktop
+### Use Case 1: The Locked-Down Virtual Desktop
 
 But what if they don't? What if they respond with, "here's a virtual desktop. You can log on to it by access this URL on your browser, install a remote desktop agent, and access it. It's the only way we allow all our resources to access the environment. I can get you elevated privileges, but it's a non-persistent desktop, i.e. it will go back to its original image on reboot... daily."
 
@@ -36,7 +31,7 @@ You log in, discover it's an older version of Windows 10, and they disabled the 
 
 > The above use case sounds like a very specific example doesn't it? Because it is. However, it's happened more than a few times for me, especially for assessments and audits. It's also happened to some of my colleagues.
 
-## Use Case 2: A Virtual Machine for each client
+### Use Case 2: A Virtual Machine for each client
 
 Here's another use case - you want a disposable VM for every client. Clients often have specific security requirements, or they insist on installing a suite of applications, a specific antivirus software, a security agent, or a horrible VPN client that stomps on other VPN clients already installed for other customers? Or worse - employee monitoring software!
 
@@ -46,7 +41,7 @@ So you separate each client by having a virtual machine hosted for each one. The
 
 One method is to clone snapshots. But you're stuck installing updates to your applications and tools for each VM. Sometimes, your VM breaks because you had to test one of the client applications.
 
-## Use Case 3: The Windows 11 Dev Environment
+### Use Case 3: The Windows 11 Dev Environment
 
 Since Windows 10, Microsoft has been granting their users the ability to download and stand up their own developmet environments with regularly updated versions of their Windows desktop operating systems.: <https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/>
 
@@ -61,9 +56,9 @@ But what if you don't want to, or can't, enter a product code?
 Let's look under the covers...
 This Hydrator is a simple PowerShell script that, when run on your disposable target machine, soak the system with a preset list of apps and utilities. There's a good chance that this script won't meet your list of preferred tools. You are free to modify it with the list of applications and utilities.
 
-# How to download and install
+## How to download and install
 
-## Option 1: You're on a restricted Windows 10 system without WinGet
+### Option 1: You're on a restricted Windows 10 system without WinGet
 
 Need to get up and running quickly? But your target system doesn't even have WinGet installed or the client has set up a policy to disable the use of the Microsoft Store to download it. But wait, you have admin privileges, so... open a Powershell 5 console and run the command below to download and extract the files from the repo (in case you don't have git locally installed)
 
@@ -72,7 +67,7 @@ Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/he
 ```
 <!-- ; Remove-Item .\SpringBox -Force -Recurse -->
 
-## Option 2: Directly download and run the script
+### Option 2: Directly download and run the script
 
 Ahh. Windows 11... the client already provisioned a system for you. It also winget and you have admin privileges already! Open an **administrative** shell window and run the command below to directly install the Hydrate script:
 
@@ -82,7 +77,20 @@ Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/he
 
 <!-- PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))" -->
 
-## Option 2: Clone the repository
+## Option 3: Clone the repository
+
+You want to change the contents of the configuration instead of running it. You could clone the repo on your system, but you don't have Git. So then you have two✌🏻 choices:
+
+### Choice 1: Fork the repository
+If you want to maintain your own, please fork this repository in your own Github private repo. That way, if you can customize it all you want, AND you get two free benefits:
+- Any fixes and features added to this repo can be fetched into your forked repo at your convenience.
+- Any fixes, features and additional appplications you would like to contribute can be PR'd here for all to share!
+
+### Choice 2: Just download it locally, update it and run it
+Copy and run the command from within your chosen folder, and it will extract the latest version into a "SpringBox" subfolder:
+```ps
+Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip
+```
 
 1. Clone this repository to your local system.
 2. If you're stuck with an out-of-the-box Windows 10 system, run the Setup-Baseline.ps1 script to install the necessary components.
@@ -104,48 +112,16 @@ The following lists outline the tools and utilities installed by the Hydrator.
 | Nerd Fonts... because why not? | Azure News Reader | |
 |  | Hashicorp Terraform | |
 
-<!-- ## Mandatory
+---
 
-- [Windows Terminal](https://github.com/microsoft/terminal)
-- [Microsoft Visual Studio Code](https://github.com/microsoft/vscode)
-- Graph X-Ray
-- Greenshot
-- PowerShell 7
-- Microsoft PowerToys
-- Microsoft SysInternals Suite
-- Nerd Fonts... because why not? -->
+### What's Next?
+Moving to using the WinGet Configure feature, which is still in Preview as of this release.
 
-<!-- ## Azure Tools
-
-- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
-- Azure StorageExplorer
-- Azure DataStudio
-- Azure Functions Core Tools
-- Azure Kusto Explorer
-- Azure Kusto Ingestion
-- Azure Kusto Tool
-- Azure News Reader
-- Hashicorp Terraform -->
-
-<!-- ## Git Tools
-
-- Git for Windows
-- GitHub Desktop
-- GitHub CLI
-- GitFiend -->
-
-<!-- ## Dev Tools
-
-- DevToys
-- Docker Desktop for Windows
-- easyWSL... might get dumped. Buggy on Win11 2306
-- NodeJS LTS -->
-
-# TO DO
+#### To do (or consider)
 - [ ] **MUST DO: Convert to Winget Configuration YAML and PowerShell DSC!!**
 - [x] Add conditions to check for components instead of forcing unecessary installs
 - [x] Add a screen shot tool (Greenshot)
 - [x] Add Graph X-Ray (Beta) to pull Microsoft Graph PowerShell from Portal Actions
 - [x] Add a screen recording tool that will export to GIF (ScreenToGif)
-- [ ] Add a tool to create animated GIFs from video files (Gifski)
-- [ ] Add a tool to convert JPG to PNG with transparency (ImageMagick)
+- [ ] Add a tool to create animated GIFs from video files (Gifski?)
+- [ ] Add a tool to convert JPG to PNG with transparency (ImageMagick?)
