@@ -104,13 +104,13 @@ The following lists outline the tools and utilities installed by the Hydrator.
 |---|---|---|---|
 | [Windows Terminal](https://github.com/microsoft/terminal) | [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/) | Git for Windows | DevToys |
 | [Microsoft Visual Studio Code](https://github.com/microsoft/vscode) | Azure StorageExplorer | GitHub Desktop | Docker Desktop for Windows |
-| Graph X-Ray | Azure DataStudio | GitHub CLI | easyWSL |
-| Greenshot | Azure Functions Core Tools | GitFiend | NodeJS LTS |
-| PowerShell 7 | Azure Kusto Explorer | |
-| Microsoft PowerToys | Azure Kusto Ingestion | |
-| Microsoft SysInternals Suite | Azure Kusto Tool | |
-| Nerd Fonts... because why not? | Azure News Reader | |
-|  | Hashicorp Terraform | |
+| [Graph X-Ray](https://graphxray.merill.net/) | Azure DataStudio | GitHub CLI | easyWSL |
+| [Greenshot](https://getgreenshot.org/) | Azure Functions Core Tools | GitFiend | NodeJS LTS |
+| [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.3) | Azure Kusto Explorer | |
+| [Microsoft PowerToys](https://learn.microsoft.com/en-us/windows/powertoys/) | Azure Kusto Ingestion | |
+| [Microsoft SysInternals Suite](https://learn.microsoft.com/en-us/sysinternals/downloads/sysinternals-suite) | Azure Kusto Tool | |
+| [Nerd Fonts](https://www.nerdfonts.com/)... because why not? | Azure News Reader | |
+|  | [Hashicorp Terraform](https://developer.hashicorp.com/terraform/intro) | |
 
 ---
 
