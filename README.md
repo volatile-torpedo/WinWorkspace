@@ -69,13 +69,13 @@ Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/he
 
 ### Option 2: Directly download and run the script
 
-Ahh. Windows 11... the client already provisioned a system for you. It also winget and you have admin privileges already! Open an **administrative** shell window and run the command below to directly install the Hydrate script:
+Ahh. Windows 11... the client already provisioned a system for you. Winget is already included and you have admin privileges already! Open an **administrative** shell window and run the command below to directly install the Hydrate script:
 
 ```ps
-Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Hydrate.ps1 -InstallAll
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Hydrate.ps1 -InstallAll
 ```
 
-<!-- PowerShell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))" -->
+<!-- PowerShell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))" -->
 
 ## Option 3: Clone the repository
 
@@ -124,4 +124,5 @@ Moving to using the WinGet Configure feature, which is still in Preview as of th
 - [x] Add Graph X-Ray (Beta) to pull Microsoft Graph PowerShell from Portal Actions
 - [x] Add a screen recording tool that will export to GIF (ScreenToGif)
 - [ ] Add a tool to create animated GIFs from video files (Gifski?)
-- [ ] Add a tool to convert JPG to PNG with transparency (ImageMagick?)
+- [ ] ~~Add a tool to convert JPG to PNG with transparency (ImageMagick?)~~
+- [x] Include `Set-ExecutionPolicy` to the quick-install command.

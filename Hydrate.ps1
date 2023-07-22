@@ -3,16 +3,36 @@
 
 <#
 .SYNOPSIS
-  A short one-line action-based description, e.g. 'Tests if a function is valid'
+  A quick method to install all the packages to install and use on a newly provisioned Windows Dev machine
 .DESCRIPTION
-  A longer description of the function, its purpose, common use cases, etc.
+  This Hydrator is a simple PowerShell script that, when run on your disposable target machine, soak the
+  system with a preset list of apps and utilities. There's a good chance that this script won't meet your 
+  list of preferred tools. You are free to modify it with the list of applications and utilities.
+.PARAMETER InstallAll
+  Instruct the script to install all packages
+.PARAMETER SkipMandatory
+  Instruct the script to skip the Mandatory packages
+.PARAMETER InstallAzTools
+  Instruct the script to install the Azure Tools
+.PARAMETER InstallGitTools
+  Instruct the script to install the Git Tools
+.PARAMETER InstallDevTools
+  Instruct the script to install the Dev Toys
+.PARAMETER Fonts  
+  Instruct the script to install the Nerd Fonts
 .NOTES
-  Information or caveats about the function e.g. 'This function is not supported in Linux'
+  This script is not supported in Linux
 .LINK
-  Specify a URI to a help page, this will show when Get-Help -Online is used.
+  https://github.com/volatile-torpedo/SpringBox
 .EXAMPLE
-  Test-MyTestFunction -Verbose
-  Explanation of the function or its result. You can include multiple examples with additional .EXAMPLE lines
+  Hydrate.ps1 -InstallAll
+  Installs all packages: Mandatory, Azure Tools, Git Tools and Dev Tools
+
+  Hydrate.ps1 -SkipMandatory -InstallAzTools -InstallGitTools -InstallDevTools
+  Installs Azure Tools, Git Tools and Dev Tools, but skips the Mandatory packages
+
+  Hydrate.ps1 -Fonts
+  Installs only the Nerd Fonts
 #>
 
 
@@ -45,13 +65,12 @@ function Get-YesNo {
 
 # Variables
 $Mandatory = @(
+  "Microsoft.WindowsTerminal", 
   "JanDeDobbeleer.OhMyPosh",
   "Graph X-Ray", # MS Store ID: 9N03GNKDJTT6
   "Greenshot.Greenshot",                
-  # "Microsoft.PerfView", 
-  "Microsoft.PowerShell",
-  "Microsoft.PowerToys",
-  "Microsoft.WindowsTerminal"
+  "Microsoft.PerfView", 
+  "Microsoft.PowerShell"
 )
   
 $AzureTools = @(
@@ -72,10 +91,12 @@ $GitTools = @(
   "GitHub.GitHubDesktop",
   "GitHub.cli",
   "TobySuggate.GitFiend",
+  "Microsoft.PowerToys",
   "StephanDilly.gitui"
 )
       
 $DevStack = @(
+  "Microsoft.VisualStudioCode",
   "DevToys",
   "Docker.DockerDesktop",
   "easyWSL"
@@ -119,9 +140,11 @@ if (-not $SkipMandatory) {
   Expand-Archive .\SysInternalsSuite.zip .\SysInternals
   Remove-Item .\SysInternalsSuite.zip
 
-  # Test this ... Install Nerd Fonts
+  # Install Nerd Fonts
   & $PsScriptRoot/nerdfonts/install.ps1
 
+  # PreConfigure Windows Terminal
+  Copy-Item -Path "$($PsScriptRoot)/bin/settings.json" -Destination "$($env:LOCALAPPDATA)/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" -Force
 }
 else {
   Write-Host "SkipMandatory is set. Ignoring Mandatory packages..." -ForegroundColor DarkYellow
