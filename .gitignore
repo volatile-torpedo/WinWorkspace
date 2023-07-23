@@ -1,0 +1,11 @@
+# Exclude packaged modules
+*.zip
+
+# Exclude .NET assemblies from source
+*.dll
+
+# Exclude folders named scratch
+**/scratch/*
+
+
+# End of https://www.toptal.com/developers/gitignore/api/powershell
