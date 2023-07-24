@@ -118,18 +118,27 @@ else {
   $InstallDevTools = Get-YesNo -Message "Do you want to install the Dev Tools?"
 }
 
-# Check for updates
-winget upgrade --accept-source-agreements --accept-source-agreements
-Install-PackageProvider -Name NuGet -Force
-# winget install -e --id Microsoft.NuGet	# This doesn't always work with all versions of Win11Dev(Preview)
+# Set Execution Policy for subsequent scripts
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force
 
-# Install Az PowerShell modules
+# Install or Update PowerShellGet, Az and winget
+Install-PackageProvider -Name NuGet -Force
+
+if (-not(Get-InstalledModule PowerShellGet -ErrorAction SilentlyContinue)) {
+  Install-Module -Name PowerShellGet -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
+}
+else {
+  Update-Module PowerShellGet -Force
+}
+
 if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
   Install-Module -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
 }
+else {
+  Update-Module Az -Force
+}
 
-# Set Execution Policy for subsequent scripts
-Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force
+winget upgrade --accept-source-agreements --accept-source-agreements
 
 # Install Mandatory packages
 if (-not $SkipMandatory) {
