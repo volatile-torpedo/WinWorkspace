@@ -128,6 +128,9 @@ if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
   Install-Module -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
 }
 
+# Set Execution Policy for subsequent scripts
+Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force
+
 # Install Mandatory packages
 if (-not $SkipMandatory) {
   Write-Host "🚧 SkipMandatory is not set. Installing Mandatory packages..." -ForegroundColor Green 
@@ -141,10 +144,13 @@ if (-not $SkipMandatory) {
   Remove-Item .\SysInternalsSuite.zip
 
   # Install Nerd Fonts
-  & $PsScriptRoot/nerdfonts/install.ps1
+  & $PsScriptRoot/bin/nerdfonts/install.ps1
 
   # PreConfigure Windows Terminal
-  Copy-Item -Path "$($PsScriptRoot)/bin/settings.json" -Destination "$($env:LOCALAPPDATA)/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" -Force
+  Copy-Item -Path "$($PsScriptRoot)/bin/terminal_profile/settings.json" -Destination "$($env:LOCALAPPDATA)/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json" -Force
+
+  # Copy Terminal PS $PROFILE
+  Copy-Item -Path "$($PsScriptRoot)/bin/ps_profile/Microsoft.PowerShell_profile.ps1" -Destination "$([Environment]::GetFolderPath("mydocuments"))/PowerShell/Microsoft.PowerShell_profile.ps1" -Force
 }
 else {
   Write-Host "SkipMandatory is set. Ignoring Mandatory packages..." -ForegroundColor DarkYellow
@@ -178,8 +184,16 @@ if ($InstallDevTools) {
   Foreach ($package in $DevStack) {
     winget install -e --id $package --accept-source-agreements --accept-package-agreements
   }
+
+  # Copy VSCode terminal PS $PROFILE
+  Copy-Item -Path "$($PsScriptRoot)/bin/ps_profile/Microsoft.VSCode_profile.ps1" -Destination "$([Environment]::GetFolderPath("mydocuments"))/PowerShell/Microsoft.VSCode_profile.ps1" -Force
 }
 else {
   Write-Host "DevStack is not set. Ignoring Dev Stack packages..." -ForegroundColor DarkYellow
 }
+
+
+# TODO:
+# [x] Add PowerShell $PROFILE files to Documents/PowerShell
+# [x] Adjust Terminal settings.json source folder
 
