@@ -11,3 +11,10 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
             [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
         }
 }
+
+# Choco argument completer
+# See https://ch0.co/tab-completion for details.
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
