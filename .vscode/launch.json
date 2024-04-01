@@ -1,0 +1,9 @@
+{
+    "configurations": [
+        {
+            "name": "PowerShell: Interactive Session",
+            "type": "PowerShell",
+            "request": "launch"
+        }
+    ]
+}
