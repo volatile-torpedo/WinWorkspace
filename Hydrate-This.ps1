@@ -315,7 +315,7 @@ Do {
             $InstallFlowStasis = -not $InstallFlowStasis
         }
         "c" { 
-            $Host.UI.RawUI.CursorPosition = $CursorPositiona
+            $Host.UI.RawUI.CursorPosition = $CursorPosition
             Write-CenteredText "You Selected [C]" -TextColor Green -BackgroundColor DarkBlue
             Start-Sleep 2
             $InstallAdminApps = -not $InstallAdminApps
@@ -339,7 +339,7 @@ Do {
     }
     
     # Write-Host "abcde#######################################" -NoNewline
-    $Host.UI.Write("`b`r  You selected: $userInput" )
+    $Host.UI.Write("`b`r  You selected: $userInput`r`n" )
     # # Check if the input is one of the valid choices
     # if ($userInput -eq 'a' -or $userInput -eq 'b' -or $userInput -eq 'c') {
     #     Write-Host "`r  You selected: $userInput" -NoNewline
@@ -472,3 +472,9 @@ if ($UserInput -eq "n") {
 
 
 
+## Download and install PowerToys user setup
+$PowerToysDlPath = "./PowerToysUserSetup.exe"
+$WebResponse = Invoke-WebRequest "https://github.com/microsoft/PowerToys/releases/latest" -Method Get
+$UrlToDownload = ($WebResponse.links).href | Where-Object {$_ -match "(?=.*PowerToysUserSetup)(?=.*x64.exe)"}
+Invoke-WebRequest -Uri $UrlToDownload -OutFile $PowerToysDlPath
+Start-Process -FilePath $PowerToysDlPath -ArgumentList "/install","/passive", "/norestart" -Wait
