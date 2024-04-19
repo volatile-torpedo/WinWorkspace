@@ -372,39 +372,49 @@ if ($UserInput -eq "n") {
 #                               ╰────╯
 
 
-# # Prompt for Options, but Skip all prompts if $InstallAll is set
-# if ($InstallAll.IsPresent) {
-#   $SkipMandatory = $false
-#   $InstallAzTools = $true
-#   $InstallGitTools = $true
-#   $InstallDevTools = $true  
-# }
-# else {
-#   $SkipMandatory = Get-YesNo -Message "Do you want to skip the Mandatory packages?"
-#   $InstallAzTools = Get-YesNo -Message "Do you want to install the Azure Tools?"
-#   $InstallGitTools = Get-YesNo -Message "Do you want to install the Git Tools?"
-#   $InstallDevTools = Get-YesNo -Message "Do you want to install the Dev Tools?"
-# }
-
-# # Set Execution Policy for subsequent scripts
+## Set Execution Policy for subsequent scripts
 # Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force
 
-# # Install or Update PowerShellGet, Az and winget
-# Install-PackageProvider -Name NuGet -Force
+# Install or Update PowerShellGet, Az and winget
+# Check if running in PowerShell 5
+if ($PSVersionTable.PSVersion.Major -lt 6) {
+  Write-Host "🚧 PowerShell 5 detected. Installing the Nuget Package Provider and PowerShellGet module..." -ForegroundColor Green
+  Install-PackageProvider -Name NuGet -Scope CurrentUser -Force
 
-# if (-not(Get-InstalledModule PowerShellGet -ErrorAction SilentlyContinue)) {
-#   Install-Module -Name PowerShellGet -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
-# }
-# else {
-#   Update-Module PowerShellGet -Force
-# }
+  # Install or Update the PowerShellGet module; version 1.x is inscluded with PS5
+  if (-not(Get-InstalledModule PowerShellGet -ErrorAction SilentlyContinue)) {
+    Install-Module -Name PowerShellGet -Scope CurrentUser -Force -SkipPublisherCheck -Confirm:$false -AllowClobber
+  }
+} else {
+  Write-Host "✅ PowerShell 6 or higher detected. Requirements are met." -ForegroundColor Green
+}
 
-# if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
-#   Install-Module -Name Az -Scope AllUsers -Force -SkipPublisherCheck -Confirm:$false
-# }
-# else {
-#   Update-Module Az -Force
-# }
+# Add the PSGallery as a trusted repository
+Write-Host "⏳ Adding the PSGallery as a trusted repository..." -ForegroundColor Gray
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Write-Host "`r`n✅ Complete" -ForegroundColor Green
+
+# Install or Update the Az module for the current user scope
+Write-Host "⏳ Installing or Updating the Az module..." -ForegroundColor Gray -NoNewline
+if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
+    Install-Module Az -Scope CurrentUser -SkipPublisherCheck -Confirm:$false -Force
+} else {
+    Write-Host "✅ The Az module is already installed." -ForegroundColor Green
+}
+Write-Host "`r`n✅ Complete" -ForegroundColor Green
+
+# Install Scoop{
+Write-Host "⏳ Installing Scoop..." -ForegroundColor Gray -NoNewline
+if (-not(Get-Command scoop -ErrorAction SilentlyContinue)) {
+    $scoop_script = Invoke-RestMethod -Uri https://get.scoop.sh 
+    Invoke-Expression $scoop_script -OutVariable var_scoop_script | Out-String
+    # check contents of $var_scoop_script
+    Write-Host "`r`nMessage: $($var_scoop_script)" -ForegroundColor Green
+} else {
+    Write-Host "✅ Scoop is already installed." -ForegroundColor Green
+}
+Write-Host "`r`n✅ Complete" -ForegroundColor Green
+
 
 # winget upgrade --accept-source-agreements --accept-source-agreements
 
@@ -477,3 +487,15 @@ $WebResponse = Invoke-WebRequest "https://github.com/microsoft/PowerToys/release
 $UrlToDownload = ($WebResponse.links).href | Where-Object {$_ -match "(?=.*PowerToysUserSetup)(?=.*x64.exe)"}
 Invoke-WebRequest -Uri $UrlToDownload -OutFile $PowerToysDlPath
 Start-Process -FilePath $PowerToysDlPath -ArgumentList "/install","/passive", "/norestart" -Wait
+
+## Download and install Visual Studio Code
+# TODO: Add a check to see if VSCode is already installed
+# TODO: Download the isntallation (try the Insider Preview)
+Start-Process -FilePath .\VSCodeUserSetup-x64-1.88.1.exe -ArgumentList "/sp-", "/silent", "/suppressmsgboxes", "/closeapplications", "/mergetasks=!runcode" -Wait
+
+## SCOOP: Install main/git
+
+## SCOOP: Install main/7zip
+
+## SCOOP: Install extras/git-tower
+
