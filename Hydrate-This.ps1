@@ -375,18 +375,60 @@ if ($UserInput -eq "n") {
 ## Set Execution Policy for subsequent scripts
 # Set-ExecutionPolicy RemoteSigned -scope CurrentUser -Force
 
+
+# Hash Table of AppX Packages
+$AppXPackagesToKill = @{
+    Clip_Champ = "Clipchamp.Clipchamp";
+    Bing_News = "Microsoft.BingNews";
+	Bing_Weather = "Microsoft.BingWeather";
+	Gaming_App = "Microsoft.GamingApp";
+	MS_Get_Help = "Microsoft.GetHelp";
+	MS_Get_Started = "Microsoft.Getstarted";
+	MS_Office_Hub = "Microsoft.MicrosoftOfficeHub";
+	Solitaire = "Microsoft.MicrosoftSolitaireCollection";
+	MS_People = "Microsoft.People";
+	Power_Automate = "Microsoft.PowerAutomateDesktop";
+	MS_To_Do = "Microsoft.Todos";
+	Windows_Alarms = "Microsoft.WindowsAlarms";
+	Windows_Communications = "microsoft.windowscommunicationsapps";
+	Windows_Feedback_Hub = "Microsoft.WindowsFeedbackHub";
+    Windows_Maps = "Microsoft.WindowsMaps";
+	Windows_Sound_Recorder = "Microsoft.WindowsSoundRecorder";
+	XBox_TCUI = "Microsoft.Xbox.TCUI";
+    XBox_Gaming_Overlay = "Microsoft.XboxGamingOverlay";
+	XBox_Speech_To_Text = "XboxSpeechToTextOverlay";
+	MS_Your_Phone = "Microsoft.YourPhone";
+	Zune_Music = "Microsoft.ZuneMusic";
+	Zune_Video = "Microsoft.ZuneVideo";
+	MS_Family = "MicrosoftFamily";
+	MS_Quick_Assist = "MicrosoftCorporationII.QuickAssist";
+	MS_Teams = "MicrosoftTeams"
+}
+	
+$AppXPackagesToKill.GetEnumerator() | ForEach-Object {
+    $AppXPackage = Get-AppxPackage -Name $_.Value -ErrorAction SilentlyContinue
+    if ($AppXPackage) {
+        Write-Host "Uninstalling $($_.Key)..." -ForegroundColor Green
+        $AppXPackage | Remove-AppxPackage
+    }
+    else {
+        Write-Host "$($_.Key) is not installed." -ForegroundColor DarkGray
+    }
+}
+
 # Install or Update PowerShellGet, Az and winget
 # Check if running in PowerShell 5
 if ($PSVersionTable.PSVersion.Major -lt 6) {
-  Write-Host "🚧 PowerShell 5 detected. Installing the Nuget Package Provider and PowerShellGet module..." -ForegroundColor Green
-  Install-PackageProvider -Name NuGet -Scope CurrentUser -Force
+    Write-Host "🚧 PowerShell 5 detected. Installing the Nuget Package Provider and PowerShellGet module..." -ForegroundColor Green
+    Install-PackageProvider -Name NuGet -Scope CurrentUser -Force
 
-  # Install or Update the PowerShellGet module; version 1.x is inscluded with PS5
-  if (-not(Get-InstalledModule PowerShellGet -ErrorAction SilentlyContinue)) {
-    Install-Module -Name PowerShellGet -Scope CurrentUser -Force -SkipPublisherCheck -Confirm:$false -AllowClobber
-  }
-} else {
-  Write-Host "✅ PowerShell 6 or higher detected. Requirements are met." -ForegroundColor Green
+    # Install or Update the PowerShellGet module; version 1.x is inscluded with PS5
+    if (-not(Get-InstalledModule PowerShellGet -ErrorAction SilentlyContinue)) {
+        Install-Module -Name PowerShellGet -Scope CurrentUser -Force -SkipPublisherCheck -Confirm:$false -AllowClobber
+    }
+}
+else {
+    Write-Host "✅ PowerShell 6 or higher detected. Requirements are met." -ForegroundColor Green
 }
 
 # Add the PSGallery as a trusted repository
@@ -398,33 +440,16 @@ Write-Host "`r`n✅ Complete" -ForegroundColor Green
 Write-Host "⏳ Installing or Updating the Az module..." -ForegroundColor Gray -NoNewline
 if (-not(Get-InstalledModule Az -ErrorAction SilentlyContinue)) {
     Install-Module Az -Scope CurrentUser -SkipPublisherCheck -Confirm:$false -Force
-} else {
-    Write-Host "✅ The Az module is already installed." -ForegroundColor Green
 }
-Write-Host "`r`n✅ Complete" -ForegroundColor Green
-
-# Install Scoop{
-Write-Host "⏳ Installing Scoop..." -ForegroundColor Gray -NoNewline
-if (-not(Get-Command scoop -ErrorAction SilentlyContinue)) {
-    $scoop_script = Invoke-RestMethod -Uri https://get.scoop.sh 
-    Invoke-Expression $scoop_script -OutVariable var_scoop_script | Out-String
-    # check contents of $var_scoop_script
-    Write-Host "`r`nMessage: $($var_scoop_script)" -ForegroundColor Green
-} else {
-    Write-Host "✅ Scoop is already installed." -ForegroundColor Green
+else {
+    Write-Host "✅ The Az module is already installed." -ForegroundColor Green
 }
 Write-Host "`r`n✅ Complete" -ForegroundColor Green
 
 
 # winget upgrade --accept-source-agreements --accept-source-agreements
 
-# # Install Mandatory packages
-# if (-not $SkipMandatory) {
-#   Write-Host "🚧 SkipMandatory is not set. Installing Mandatory packages..." -ForegroundColor Green 
-#   Foreach ($package in $Mandatory) {
-#     winget install -e --id $package --accept-source-agreements --accept-package-agreements
-#   }
-  
+ 
 #   # Install SysInternals Suite
 #   Invoke-WebRequest 'https://download.sysinternals.com/files/SysinternalsSuite.zip' -OutFile .\SysInternalsSuite.zip
 #   Expand-Archive .\SysInternalsSuite.zip .\SysInternals
@@ -484,18 +509,38 @@ Write-Host "`r`n✅ Complete" -ForegroundColor Green
 ## Download and install PowerToys user setup
 $PowerToysDlPath = "./PowerToysUserSetup.exe"
 $WebResponse = Invoke-WebRequest "https://github.com/microsoft/PowerToys/releases/latest" -Method Get
-$UrlToDownload = ($WebResponse.links).href | Where-Object {$_ -match "(?=.*PowerToysUserSetup)(?=.*x64.exe)"}
+$UrlToDownload = ($WebResponse.links).href | Where-Object { $_ -match "(?=.*PowerToysUserSetup)(?=.*x64.exe)" }
 Invoke-WebRequest -Uri $UrlToDownload -OutFile $PowerToysDlPath
-Start-Process -FilePath $PowerToysDlPath -ArgumentList "/install","/passive", "/norestart" -Wait
+Start-Process -FilePath $PowerToysDlPath -ArgumentList "/install", "/passive", "/norestart" -Wait
 
 ## Download and install Visual Studio Code
 # TODO: Add a check to see if VSCode is already installed
 # TODO: Download the isntallation (try the Insider Preview)
 Start-Process -FilePath .\VSCodeUserSetup-x64-1.88.1.exe -ArgumentList "/sp-", "/silent", "/suppressmsgboxes", "/closeapplications", "/mergetasks=!runcode" -Wait
 
+# Install Scoop
+Write-Host "⏳ Installing Scoop..." -ForegroundColor Gray -NoNewline
+if (-not(Get-Command scoop -ErrorAction SilentlyContinue)) {
+    $scoop_script = Invoke-RestMethod -Uri https://get.scoop.sh 
+    Invoke-Expression $scoop_script -OutVariable var_scoop_script | Out-String
+    # check contents of $var_scoop_script
+    Write-Host "`r`nMessage: $($var_scoop_script)" -ForegroundColor Green
+}
+else {
+    Write-Host "✅ Scoop is already installed." -ForegroundColor Green
+}
+Write-Host "`r`n✅ Complete" -ForegroundColor Green
+
 ## SCOOP: Install main/git
 
 ## SCOOP: Install main/7zip
 
 ## SCOOP: Install extras/git-tower
+
+## Uninstall Packages
+Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage
+Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage
+Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage  
+Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
+Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage
 
