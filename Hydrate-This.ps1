@@ -377,39 +377,40 @@ if ($UserInput -eq "n") {
 
 
 # Hash Table of AppX Packages
-$AppXPackagesToKill = @{
-    Clip_Champ = "Clipchamp.Clipchamp";
-    Bing_News = "Microsoft.BingNews";
-	Bing_Weather = "Microsoft.BingWeather";
-	Gaming_App = "Microsoft.GamingApp";
-	MS_Get_Help = "Microsoft.GetHelp";
-	MS_Get_Started = "Microsoft.Getstarted";
-	MS_Office_Hub = "Microsoft.MicrosoftOfficeHub";
-	Solitaire = "Microsoft.MicrosoftSolitaireCollection";
-	MS_People = "Microsoft.People";
-	Power_Automate = "Microsoft.PowerAutomateDesktop";
-	MS_To_Do = "Microsoft.Todos";
-	Windows_Alarms = "Microsoft.WindowsAlarms";
-	Windows_Communications = "microsoft.windowscommunicationsapps";
-	Windows_Feedback_Hub = "Microsoft.WindowsFeedbackHub";
-    Windows_Maps = "Microsoft.WindowsMaps";
-	Windows_Sound_Recorder = "Microsoft.WindowsSoundRecorder";
-	XBox_TCUI = "Microsoft.Xbox.TCUI";
-    XBox_Gaming_Overlay = "Microsoft.XboxGamingOverlay";
-	XBox_Speech_To_Text = "XboxSpeechToTextOverlay";
-	MS_Your_Phone = "Microsoft.YourPhone";
-	Zune_Music = "Microsoft.ZuneMusic";
-	Zune_Video = "Microsoft.ZuneVideo";
-	MS_Family = "MicrosoftFamily";
-	MS_Quick_Assist = "MicrosoftCorporationII.QuickAssist";
-	MS_Teams = "MicrosoftTeams"
+$AppXPackagesToKill = [ordered]@{
+    Bing_News              = "Microsoft.BingNews";
+    Bing_Weather           = "Microsoft.BingWeather";
+    Clip_Champ             = "Clipchamp.Clipchamp";
+    MS_Get_Help            = "Microsoft.GetHelp";
+    MS_Get_Started         = "Microsoft.Getstarted";
+    Power_Automate         = "Microsoft.PowerAutomateDesktop";
+    XBox_Gaming_Overlay    = "Microsoft.XboxGamingOverlay";
+
+    Gaming_App             = "Microsoft.GamingApp";
+    MS_Office_Hub          = "Microsoft.MicrosoftOfficeHub";
+    Solitaire              = "Microsoft.MicrosoftSolitaireCollection";
+    MS_People              = "Microsoft.People";
+    MS_To_Do               = "Microsoft.Todos";
+    Windows_Alarms         = "Microsoft.WindowsAlarms";
+    Windows_Communications = "microsoft.windowscommunicationsapps";
+    Windows_Feedback_Hub   = "Microsoft.WindowsFeedbackHub";
+    Windows_Maps           = "Microsoft.WindowsMaps";
+    Windows_Sound_Recorder = "Microsoft.WindowsSoundRecorder";
+    XBox_TCUI              = "Microsoft.Xbox.TCUI";
+    XBox_Speech_To_Text    = "XboxSpeechToTextOverlay";
+    MS_Your_Phone          = "Microsoft.YourPhone";
+    Zune_Music             = "Microsoft.ZuneMusic";
+    Zune_Video             = "Microsoft.ZuneVideo";
+    MS_Family              = "MicrosoftFamily";
+    MS_Quick_Assist        = "MicrosoftCorporationII.QuickAssist";
+    MS_Teams               = "MicrosoftTeams"
 }
 	
 $AppXPackagesToKill.GetEnumerator() | ForEach-Object {
     $AppXPackage = Get-AppxPackage -Name $_.Value -ErrorAction SilentlyContinue
     if ($AppXPackage) {
         Write-Host "Uninstalling $($_.Key)..." -ForegroundColor Green
-        $AppXPackage | Remove-AppxPackage
+        # $AppXPackage | Remove-AppxPackage
     }
     else {
         Write-Host "$($_.Key) is not installed." -ForegroundColor DarkGray
