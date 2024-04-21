@@ -378,39 +378,51 @@ if ($UserInput -eq "n") {
 
 # Hash Table of AppX Packages
 $AppXPackagesToKill = [ordered]@{
-    Bing_News              = "Microsoft.BingNews";
-    Bing_Weather           = "Microsoft.BingWeather";
-    Clip_Champ             = "Clipchamp.Clipchamp";
-    MS_Get_Help            = "Microsoft.GetHelp";
-    MS_Get_Started         = "Microsoft.Getstarted";
-    Power_Automate         = "Microsoft.PowerAutomateDesktop";
-    XBox_Gaming_Overlay    = "Microsoft.XboxGamingOverlay";
-
-    Gaming_App             = "Microsoft.GamingApp";
-    MS_Office_Hub          = "Microsoft.MicrosoftOfficeHub";
-    Solitaire              = "Microsoft.MicrosoftSolitaireCollection";
-    MS_People              = "Microsoft.People";
-    MS_To_Do               = "Microsoft.Todos";
-    Windows_Alarms         = "Microsoft.WindowsAlarms";
-    Windows_Communications = "microsoft.windowscommunicationsapps";
-    Windows_Feedback_Hub   = "Microsoft.WindowsFeedbackHub";
-    Windows_Maps           = "Microsoft.WindowsMaps";
-    Windows_Sound_Recorder = "Microsoft.WindowsSoundRecorder";
-    XBox_TCUI              = "Microsoft.Xbox.TCUI";
-    XBox_Speech_To_Text    = "XboxSpeechToTextOverlay";
-    MS_Your_Phone          = "Microsoft.YourPhone";
-    Zune_Music             = "Microsoft.ZuneMusic";
-    Zune_Video             = "Microsoft.ZuneVideo";
-    MS_Family              = "MicrosoftFamily";
-    MS_Quick_Assist        = "MicrosoftCorporationII.QuickAssist";
-    MS_Teams               = "MicrosoftTeams"
+    Clip_Champ                = "Clipchamp.Clipchamp";
+    Microsoft_Teams           = "MicrosoftTeams"
+    MS_Bing_News              = "Microsoft.BingNews";
+    MS_Bing_Weather           = "Microsoft.BingWeather";
+    MS_Family                 = "MicrosoftFamily";
+    MS_Get_Help               = "Microsoft.GetHelp";
+    MS_Get_Started            = "Microsoft.Getstarted";
+    MS_Mixed_Reality_Portal   = "Microsoft.MixedReality.Portal";
+    MS_Office_Hub             = "Microsoft.MicrosoftOfficeHub";
+    MS_OneConnect             = "Microsoft.OneConnect";
+    MS_OneDrive_Sync          = "Microsoft.OneDriveSync"
+    MS_People                 = "Microsoft.People";
+    MS_Power_Automate         = "Microsoft.PowerAutomateDesktop";
+    MS_Solitaire_Collection   = "Microsoft.MicrosoftSolitaireCollection";
+    MS_Sticky_Notes           = "Microsoft.MicrosoftStickyNotes";
+    MS_Teams                  = "MSTeams"
+    MS_Your_Phone             = "Microsoft.YourPhone";
+    MS_Zune_Music             = "Microsoft.ZuneMusic";
+    MS_Zune_Video             = "Microsoft.ZuneVideo";
+    Windows_Alarms            = "Microsoft.WindowsAlarms";
+    Windows_Camera            = "Microsoft.WindowsCamera";
+    Windows_Communications    = "microsoft.windowscommunicationsapps";
+    Windows_Feedback_Hub      = "Microsoft.WindowsFeedbackHub";
+    Windows_Mail_Calendar     = "microsoft.windowscommunicationsapps";
+    Windows_Maps              = "Microsoft.WindowsMaps";
+    Windows_Media_Player      = "Microsoft.WindowsMediaPlayer";
+    # Windows_Narrator          = "Microsoft.Windows.NarratorQuickStart";  # Not possible... yet
+    # Windows_Parental_Controls = "Microsoft.Windows.ParentalControls";    # No functiona
+    Windows_Photos            = "Microsoft.Windows.Photos";
+    Windows_Sound_Recorder    = "Microsoft.WindowsSoundRecorder";
+    XBox_App                  = "Microsoft.XboxApp";
+    XBox_Game_Overlay         = "Microsoft.XboxGameOverlay";
+    # XBox_GameCallableUI       = "Microsoft.XboxGameCallableUI";           # No functiona
+    XBox_Gaming_Overlay       = "Microsoft.XboxGamingOverlay";
+    XBox_Identity_Provider    = "Microsoft.XboxIdentityProvider";
+    XBox_Speech_To_Text       = "Microsoft.XboxSpeechToTextOverlay";
+    XBox_TCUI                 = "Microsoft.Xbox.TCUI";
+    XBox_Tray                 = "Microsoft.XboxGameOverlay";
 }
 	
 $AppXPackagesToKill.GetEnumerator() | ForEach-Object {
     $AppXPackage = Get-AppxPackage -Name $_.Value -ErrorAction SilentlyContinue
     if ($AppXPackage) {
         Write-Host "Uninstalling $($_.Key)..." -ForegroundColor Green
-        # $AppXPackage | Remove-AppxPackage
+        $AppXPackage | Remove-AppxPackage
     }
     else {
         Write-Host "$($_.Key) is not installed." -ForegroundColor DarkGray
@@ -539,8 +551,6 @@ Write-Host "`r`n✅ Complete" -ForegroundColor Green
 ## SCOOP: Install extras/git-tower
 
 ## Uninstall Packages
-Get-AppxPackage Microsoft.BingNews | Remove-AppxPackage
-Get-AppxPackage Microsoft.BingWeather | Remove-AppxPackage
 Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage  
 Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
 Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage
