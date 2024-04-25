@@ -280,6 +280,7 @@ function Write-CenteredText {
 # +-----------------------------------+
 # Determine if this script is invoked as an expression, e.g. run from command line or via `iex URL`
 $IsThisScriptAnInvokedExpression = ($null -eq $MyInvocation.MyCommand.Path)
+$IsThisScriptAnInvokedExpression
 
 # Determine if this process is being run in an elevated process; tested with Windows sudo
 $IsElevated = [bool](([System.Security.Principal.WindowsIdentity]::GetCurrent()).groups -match "S-1-5-32-544")
