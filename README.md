@@ -155,3 +155,41 @@ Moving to using the WinGet Configure feature, which is still in Preview as of th
 - [x] Include `Set-ExecutionPolicy` to the quick-install command.
 
 </details>
+
+---
+## Ideal
+```
+1527c705-839a-4832-9118-54d4Bd6a0c89
+c5e2524a-ea46-4f67-841f-6a9465d9d515
+E2A4F912-2574-4A75-9BB0-0D023378592B
+F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE
+Microsoft.AAD.BrokerPlugin
+Microsoft.AccountsControl
+Microsoft.ECApp
+Microsoft.MicrosoftEdge
+Microsoft.MicrosoftEdge.Stable
+Microsoft.SecHealthUI
+Microsoft.UI.Xaml.2.4
+Microsoft.UI.Xaml.2.7
+Microsoft.UI.Xaml.CBS
+Microsoft.VCLibs.140.00
+Microsoft.Win32WebViewHost
+Microsoft.Windows.CapturePicker
+Microsoft.Windows.CloudExperienceHost
+Microsoft.Windows.NarratorQuickStart
+Microsoft.Windows.OOBENetworkCaptivePortal
+Microsoft.Windows.OOBENetworkConnectionFlow
+Microsoft.Windows.PeopleExperienceHost
+Microsoft.Windows.PinningConfirmationDialog
+Microsoft.Windows.ShellExperienceHost
+Microsoft.Windows.StartMenuExperienceHost
+Microsoft.Windows.XGpuEjectDialog
+Microsoft.WindowsAppRuntime.CBS
+MicrosoftWindows.Client.CBS
+MicrosoftWindows.Client.Core
+MicrosoftWindows.Client.FileExp
+MicrosoftWindows.UndockedDevKit
+Windows.CBSPreview
+windows.immersivecontrolpanel
+Windows.PrintDialog
+```
