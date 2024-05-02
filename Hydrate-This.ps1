@@ -79,18 +79,15 @@ function Show-MenuOptions {
     # Show-MenuOptions-Body
 
     # Menu Options Body
-    # b01 │  [A] Trim Built-In Bloat for Windows for this profile                 [Not Selected]  │
-    # b02 │                                                                                       │
-    # b03 │  [B] Install FLO-Stasis                                        [Not Yet Available]    │
-    # b04 │                                                                                       │
-    # b05 │  [C] Install apps that require an elevated prompt                 [Not Available]     │
-    # b06 │                                                                                       │
-    # b07 │  [D] Trim Windows for this and future profiles                    [Not Available*]    │
-    # b08 │                                                                                       │
-    # b09 │  [E] Install Nerd Fonts                                           [Not Available*]    │
-    # b10                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  1 │                                                                                       │
+    # b01 │  [A] Trim Generally Useless Windows Apps                            [Not Selected]    │
+    # b02 │  [B] Trim Communications Apps (OneDrive, Teams, etc.)               [Not Selected]    │
+    # b03 │  [C] Install FLO-Stasis (shortcut keys, hostrings)             [Not Yet Available]    │
+    # b04 │  [D] Install apps that require an elevated prompt                  [Not Available]    │
+    # b05 │  [E] Trim Windows for this and future profiles                    [Not Available*]    │
+    # b06 │  [F] Install Nerd Fonts                                           [Not Available*]    │
+    # b07 │                                                                                       │
 
-    # Line b01-b02: Option to Trim Built-In Bloat for Windows for this profile
+    # Line b01: Option to Trim Built-In Bloat for Windows for this profile
     Write-Host "  │" -ForegroundColor Green -NoNewline
     Write-Host "  [A] Trim Built-In Bloat for Windows for this profile                 " -ForegroundColor Gray -NoNewline
     if ($TrimWindows) {
@@ -100,7 +97,6 @@ function Show-MenuOptions {
         Write-Host "[Not Selected]  " -ForegroundColor DarkGray -NoNewline
     }
     Write-Host "│" -ForegroundColor Green 
-    Write-Host "  │                                                                                       │" -ForegroundColor Green
     
     # Line b03-b04: Option to Install FLO-Stasis
     Write-Host "  │" -ForegroundColor Green -NoNewline
@@ -127,11 +123,7 @@ function Show-MenuOptions {
     Write-Host "  │                                                                                       │" -ForegroundColor Green
     
     # Show Menu Footer
-    Show-MenuOptions-Footer
-
-    # 31 Installation Aborted.
-    # 32 Are you sure you want to continue (Y/n)?
-    
+    Show-MenuOptions-Footer    
 }
 
 function Show-MenuOptions-Header {
@@ -326,7 +318,12 @@ Do {
             Start-Sleep 2
         }
         "x" { 
-            $DoIt = $true 
+            # Wait for user input
+            $CancelThis = Read-Host "Are you sure you want to abort (Y/n)?"
+            if (($CancelThis -eq "Y") -or ($CancelThis -eq "y") -or ($CancelThis -eq "")) {
+                Write-Host "Installation Aborted." -ForegroundColor Red
+                Exit            
+            }
         }
         "i" { 
             $DoIt = $true 
@@ -351,13 +348,12 @@ Do {
 
 } Until ($DoIt)
 
+Write-Host "Trim Windows = $TrimWindows"
+Write-Host "Install FLO-Stasis = $InstallFlowStasis"
+Write-Host "Install Admin Apps = $InstallAdminApps"
+Exit
 
-# Wait for user input
-$UserInput = "Are you sure you want to continue (Y/n)?"
-if ($UserInput -eq "n") {
-    Write-Host "Installation Aborted." -ForegroundColor Red
-    Exit
-}
+
 
 # if ($SkipMenu.IsPresent) {
 #     # Show-MenuOptions
@@ -379,54 +375,76 @@ if ($UserInput -eq "n") {
 
 # Hash Table of AppX Packages
 $AppXPackagesToKill = [ordered]@{
-    Clip_Champ                = "Clipchamp.Clipchamp";
-    Microsoft_Teams           = "MicrosoftTeams"
-    MS_Bing_News              = "Microsoft.BingNews";
-    MS_Bing_Weather           = "Microsoft.BingWeather";
-    MS_Family                 = "MicrosoftFamily";
-    MS_Get_Help               = "Microsoft.GetHelp";
-    MS_Get_Started            = "Microsoft.Getstarted";
-    MS_Mixed_Reality_Portal   = "Microsoft.MixedReality.Portal";
-    MS_Office_Hub             = "Microsoft.MicrosoftOfficeHub";
-    MS_OneConnect             = "Microsoft.OneConnect";
-    MS_OneDrive_Sync          = "Microsoft.OneDriveSync"
-    MS_People                 = "Microsoft.People";
-    MS_Power_Automate         = "Microsoft.PowerAutomateDesktop";
-    MS_Solitaire_Collection   = "Microsoft.MicrosoftSolitaireCollection";
-    MS_Sticky_Notes           = "Microsoft.MicrosoftStickyNotes";
-    MS_Teams                  = "MSTeams"
-    MS_Your_Phone             = "Microsoft.YourPhone";
-    MS_Zune_Music             = "Microsoft.ZuneMusic";
-    MS_Zune_Video             = "Microsoft.ZuneVideo";
-    Windows_Alarms            = "Microsoft.WindowsAlarms";
-    Windows_Camera            = "Microsoft.WindowsCamera";
-    Windows_Communications    = "microsoft.windowscommunicationsapps";
-    Windows_Feedback_Hub      = "Microsoft.WindowsFeedbackHub";
-    Windows_Mail_Calendar     = "microsoft.windowscommunicationsapps";
-    Windows_Maps              = "Microsoft.WindowsMaps";
-    Windows_Media_Player      = "Microsoft.WindowsMediaPlayer";
+    Clip_Champ              = "Clipchamp.Clipchamp";
+    MS_Bing_News            = "Microsoft.BingNews";
+    MS_Bing_Weather         = "Microsoft.BingWeather";
+    MS_Family               = "MicrosoftFamily";
+    MS_Get_Help             = "Microsoft.GetHelp";
+    MS_Get_Started          = "Microsoft.Getstarted";
+    MS_Mixed_Reality_Portal = "Microsoft.MixedReality.Portal";
+    MS_Office_Hub           = "Microsoft.MicrosoftOfficeHub";
+    MS_People               = "Microsoft.People";
+    MS_Power_Automate       = "Microsoft.PowerAutomateDesktop";
+    MS_Solitaire_Collection = "Microsoft.MicrosoftSolitaireCollection";
+    MS_Sticky_Notes         = "Microsoft.MicrosoftStickyNotes";
+    MS_Teams                = "MSTeams"
+    MS_Your_Phone           = "Microsoft.YourPhone";
+    MS_Zune_Music           = "Microsoft.ZuneMusic";
+    MS_Zune_Video           = "Microsoft.ZuneVideo";
+    Windows_Alarms          = "Microsoft.WindowsAlarms";
+    Windows_Camera          = "Microsoft.WindowsCamera";
+    Windows_Communications  = "microsoft.windowscommunicationsapps";
+    Windows_Feedback_Hub    = "Microsoft.WindowsFeedbackHub";
+    Windows_Mail_Calendar   = "microsoft.windowscommunicationsapps";
+    Windows_Maps            = "Microsoft.WindowsMaps";
+    Windows_Media_Player    = "Microsoft.WindowsMediaPlayer";
     # Windows_Narrator          = "Microsoft.Windows.NarratorQuickStart";  # Not possible... yet
     # Windows_Parental_Controls = "Microsoft.Windows.ParentalControls";    # No functiona
-    Windows_Photos            = "Microsoft.Windows.Photos";
-    Windows_Sound_Recorder    = "Microsoft.WindowsSoundRecorder";
-    XBox_App                  = "Microsoft.XboxApp";
-    XBox_Game_Overlay         = "Microsoft.XboxGameOverlay";
+    Windows_Photos          = "Microsoft.Windows.Photos";
+    Windows_Sound_Recorder  = "Microsoft.WindowsSoundRecorder";
+    XBox_App                = "Microsoft.XboxApp";
+    XBox_Game_Overlay       = "Microsoft.XboxGameOverlay";
     # XBox_GameCallableUI       = "Microsoft.XboxGameCallableUI";           # No functiona
-    XBox_Gaming_Overlay       = "Microsoft.XboxGamingOverlay";
-    XBox_Identity_Provider    = "Microsoft.XboxIdentityProvider";
-    XBox_Speech_To_Text       = "Microsoft.XboxSpeechToTextOverlay";
-    XBox_TCUI                 = "Microsoft.Xbox.TCUI";
-    XBox_Tray                 = "Microsoft.XboxGameOverlay";
+    XBox_Gaming_Overlay     = "Microsoft.XboxGamingOverlay";
+    XBox_Identity_Provider  = "Microsoft.XboxIdentityProvider";
+    XBox_Speech_To_Text     = "Microsoft.XboxSpeechToTextOverlay";
+    XBox_TCUI               = "Microsoft.Xbox.TCUI";
+    XBox_Tray               = "Microsoft.XboxGameOverlay";
 }
-	
-$AppXPackagesToKill.GetEnumerator() | ForEach-Object {
-    $AppXPackage = Get-AppxPackage -Name $_.Value -ErrorAction SilentlyContinue
-    if ($AppXPackage) {
-        Write-Host "Uninstalling $($_.Key)..." -ForegroundColor Green
-        $AppXPackage | Remove-AppxPackage
+
+$AppXCommPackages = [ordered]@{
+    Windows_Mail_Calendar = "microsoft.windowscommunicationsapps";
+    Windows_Teams         = "MicrosoftTeams";
+    Microsoft_Teams       = "MicrosoftTeams";
+    MS_OneConnect         = "Microsoft.OneConnect";
+    MS_OneDrive_Sync      = "Microsoft.OneDriveSync"
+}
+
+# Trim General Windows Apps
+if ($TrimWndows -eq $true) {
+    $AppXPackagesToKill.GetEnumerator() | ForEach-Object {
+        $AppXPackage = Get-AppxPackage -Name $_.Value -ErrorAction SilentlyContinue
+        if ($AppXPackage) {
+            Write-Host "Uninstalling $($_.Key)..." -ForegroundColor Green
+            $AppXPackage | Remove-AppxPackage
+        }
+        else {
+            Write-Host "$($_.Key) is not installed." -ForegroundColor DarkGray
+        }
     }
-    else {
-        Write-Host "$($_.Key) is not installed." -ForegroundColor DarkGray
+}
+
+# Trim Windows Communication Apps
+if ($TrimWndows -eq $true) {
+    $AppXCommPackages.GetEnumerator() | ForEach-Object {
+        $AppXPackage = Get-AppxPackage -Name $_.Value -ErrorAction SilentlyContinue
+        if ($AppXPackage) {
+            Write-Host "Uninstalling $($_.Key)..." -ForegroundColor Green
+            $AppXPackage | Remove-AppxPackage
+        }
+        else {
+            Write-Host "$($_.Key) is not installed." -ForegroundColor DarkGray
+        }
     }
 }
 
@@ -552,7 +570,7 @@ Write-Host "`r`n✅ Complete" -ForegroundColor Green
 ## SCOOP: Install extras/git-tower
 
 ## Uninstall Packages
-Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage  
-Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
-Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage
+# Get-AppxPackage Microsoft.GetHelp | Remove-AppxPackage  
+# Get-AppxPackage Microsoft.Getstarted | Remove-AppxPackage
+# Get-AppxPackage Microsoft.Messaging | Remove-AppxPackage
 
