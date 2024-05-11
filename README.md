@@ -1,5 +1,5 @@
 <h1 align="center">
-SpringBox
+WinWorkspace
 </h1>
 
 <h2 align="center">
@@ -8,7 +8,7 @@ SpringBox
 
 ### 
 
-SpringBox - install your apps and tools on your disposable Windows systems easily.
+WinWorkspace - install your apps and tools on your disposable Windows systems easily.
 
 - [Why do you want this?](#why-do-you-want-this)
   - [Use Cases](#use-cases)
@@ -29,7 +29,7 @@ SpringBox - install your apps and tools on your disposable Windows systems easil
 # Why do you want this? 
 Read the [Use Cases](#use-cases) section for more.
 
-![SpringBox](.images/hydrator_small.jpeg) 
+![WinWorkspace](.images/hydrator_small.jpeg) 
 <!-- ![Alt text](.images/hydrator_small.jpeg) -->
 
 ## Use Cases
@@ -85,19 +85,19 @@ This Hydrator is a simple PowerShell script that, when run on your disposable ta
 Need to get up and running quickly? But your target system doesn't even have WinGet installed or the client has set up a policy to disable the use of the Microsoft Store to download it. But wait, you have admin privileges, so... open a Powershell 5 console and run the command below to download and extract the files from the repo (in case you don't have git locally installed)
 
 ```ps
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Setup-Baseline.ps1; & .\SpringBox\Hydrate.ps1 -InstallAll
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/WinWorkspace/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\WinWorkspace-main .\WinWorkspace; Remove-Item .\main.zip; & .\WinWorkspace\Setup-Baseline.ps1; & .\WinWorkspace\Hydrate.ps1 -InstallAll
 ```
-<!-- ; Remove-Item .\SpringBox -Force -Recurse -->
+<!-- ; Remove-Item .\WinWorkspace -Force -Recurse -->
 
 ### Option 2: Directly download and run the script
 
 Ahh. Windows 11... the client already provisioned a system for you. Winget is already included and you have admin privileges already! Open an **administrative** shell window and run the command below to directly install the Hydrate script:
 
 ```ps
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip; & .\SpringBox\Hydrate.ps1 -InstallAll
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/WinWorkspace/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\WinWorkspace-main .\WinWorkspace; Remove-Item .\main.zip; & .\WinWorkspace\Hydrate.ps1 -InstallAll
 ```
 
-<!-- PowerShell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/SpringBox/main/Hydrate.ps1'))" -->
+<!-- PowerShell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/volatile-torpedo/WinWorkspace/main/Hydrate.ps1'))" -->
 
 ## Option 3: Clone the repository
 
@@ -109,9 +109,9 @@ If you want to maintain your own, please fork this repository in your own Github
 - Any fixes, features and additional appplications you would like to contribute can be PR'd here for all to share!
 
 ### Choice 2: Just download it locally, update it and run it
-Copy and run the command from within your chosen folder, and it will extract the latest version into a "SpringBox" subfolder:
+Copy and run the command from within your chosen folder, and it will extract the latest version into a "WinWorkspace" subfolder:
 ```ps
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/SpringBox/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\SpringBox-main .\SpringBox; Remove-Item .\main.zip
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-WebRequest 'https://github.com/volatile-torpedo/WinWorkspace/archive/refs/heads/main.zip' -OutFile .\main.zip; Expand-Archive .\main.zip .\; Rename-Item .\WinWorkspace-main .\WinWorkspace; Remove-Item .\main.zip
 ```
 
 1. Clone this repository to your local system.
