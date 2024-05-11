@@ -452,6 +452,14 @@ if ($TrimWndows -eq $true) {
 # Check if running in PowerShell 5
 if ($PSVersionTable.PSVersion.Major -lt 6) {
     Write-Host "🚧 PowerShell 5 detected. Installing the Nuget Package Provider and PowerShellGet module..." -ForegroundColor Green
+    # Check if running in Windows ARM
+    if ( $env:processor_architecture -eq "ARM64") {
+      Invoke-WebRequest -Uri https://aka.ms/getwinget -OutFile winget.msixbundle
+      Add-AppxPackage winget.msixbundle
+      Remove-Item winget.msixbundle
+    }
+
+    # Running in x64
     Install-PackageProvider -Name NuGet -Scope CurrentUser -Force
 
     # Install or Update the PowerShellGet module; version 1.x is inscluded with PS5
