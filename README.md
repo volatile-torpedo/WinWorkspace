@@ -26,21 +26,26 @@ WinWorkspace - install your apps and tools on your disposable Windows systems ea
     - [What's Next?](#whats-next)
       - [To do (or consider)](#to-do-or-consider)
 
-# Why do you want this? 
-Read the [Use Cases](#use-cases) section for more.
+# When should I use WinWorkspace?
 
-![WinWorkspace](.images/hydrator_small.jpeg) 
-<!-- ![Alt text](.images/hydrator_small.jpeg) -->
+So you've been provided with a Windows desktop environment but you're not a member of the local administrators group. The desktop could even be you're technical consultant set on assessing a problem, performing an audit, or integrating a solution. It's either for your client or your company's client. You decided that before you could start typing away at your keyboard, you need a "clean" environment. "Clean", in this case, is just a compute environment that has all the tools you need to get the job done.
 
-## Use Cases
+<!--
+# FAQ
+<details>
+  <summary><b>Question?</b></summary>
+  This is the answer
+</details>
+-->
 
-Let's start with a situation - you're technical consultant set on assessing a problem, performing an audit, or integrating a solution. It's either for your client or your company's client. You decided that before you could start typing away at your keyboard, you need a "clean" environment. "Clean", in this case, is just a compute environment that has all the tools you need to get the job done.
+
+
+
 
 The client decides you give you a new laptop to do all that. You have the privileges to install your tools. If this happens, stop reading here and get to work!
 
-### Use Case 1: The Locked-Down Virtual Desktop
 <details>
-<summary></summary>
+<summary><b>Use Case 1: The Locked-Down Virtual Desktop</b></summary>
 
 But what if they don't? What if they respond with, "here's a virtual desktop. You can log on to it by access this URL on your browser, install a remote desktop agent, and access it. It's the only way we allow all our resources to access the environment. I can get you elevated privileges, but it's a non-persistent desktop, i.e. it will go back to its original image on reboot... daily."
 
@@ -49,9 +54,8 @@ You log in, discover it's an older version of Windows 10, and they disabled the 
 > The above use case sounds like a very specific example doesn't it? Because it is. However, it's happened more than a few times for me, especially for assessments and audits. It's also happened to some of my colleagues.
 </details>
 
-### Use Case 2: A Virtual Machine for each client
 <details>
-<summary></summary>
+<summary><b>Use Case 2: A Virtual Machine for each client</b></summary>
 Here's another use case - you want a disposable VM for every client. Clients often have specific security requirements, or they insist on installing a suite of applications, a specific antivirus software, a security agent, or a horrible VPN client that stomps on other VPN clients already installed for other customers? Or worse - employee monitoring software!
 
 Whatever the reason, you want to make sure that those apps are not installed on your specific workstation that you use to access other environments like your other clients or your own.
@@ -61,9 +65,9 @@ So you separate each client by having a virtual machine hosted for each one. The
 One method is to clone snapshots. But you're stuck installing updates to your applications and tools for each VM. Sometimes, your VM breaks because you had to test one of the client applications.
 </details>
 
-### Use Case 3: The Windows 11 Dev Environment
+
 <details>
-<summary></summary>
+<summary><b>Use Case 3: The Windows 11 Dev Environment</b></summary>
 Since Windows 10, Microsoft has been granting their users the ability to download and stand up their own developmet environments with regularly updated versions of their Windows desktop operating systems.: <https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/>
 
 These images are not activated, but you can always activate them with the Product Codes from your Visual Studio Subscriptions (formerly known as MSDN Subscriptions). You just have to do it within the grace period before they expire.
