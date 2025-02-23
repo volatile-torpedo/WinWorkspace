@@ -6,21 +6,24 @@ WinWorkspace
   Install tools into a Windows Dev/Jump box quickly and consistently!
 </h2>
 
+<!--
 > [!NOTE]  
 > Highlights information that users should take into account, even when skimming.
 
 > [!TIP]
 > Optional information to help a user be more successful.
+-->
 
 > [!IMPORTANT]  
-> Crucial information necessary for users to succeed.
+> This repo has lost a lot of momentum because of well... work. But now that it's behind me, I'm bringing this back, and including a rename - [MIZU](https://github.com/volatile-torpedo/mizu)
 
+<!--
 > [!WARNING]  
 > Critical content demanding immediate user attention due to potential risks.
 
 > [!CAUTION]
 > Negative potential consequences of an action.
-
+-->
 WinWorkspace - install your apps and tools on your disposable Windows systems easily.
 
 - [Why do you want this?](#why-do-you-want-this)
